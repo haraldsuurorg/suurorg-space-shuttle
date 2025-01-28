@@ -13,9 +13,10 @@ return new class extends Migration
     {
         Schema::create('pricelists', function (Blueprint $table) {
             $table->id();
-            $table->longText('data');
+            $table->string('pricelist_id');
             $table->timestamp('valid_until')->nullable();
             $table->timestamps();
+            $table->longText('data');
         });
     }
 
