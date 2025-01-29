@@ -69,7 +69,7 @@
         + Return as JSON.
 7. Implement Hardcoded Travel Routes:
 
-    - Create config/travel_routes.php (or data/travel_routes.json) to store possible routes (origin/destination pairs).
+    + Create config/travel_routes.php (or data/travel_routes.json) to store possible routes (origin/destination pairs).
     - Load and use this data in backend for filtering and frontend data.
 
 ## Phase 2: Frontend - React Setup and Displaying Data ##

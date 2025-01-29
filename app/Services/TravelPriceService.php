@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Models\Pricelist;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 

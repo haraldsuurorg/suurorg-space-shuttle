@@ -22,10 +22,10 @@ class TravelPricesController extends Controller
             return response()->json(['error' => 'No pricelists found in the database'], 404);
         }
 
-        $routeData = json_encode($latestPriceList->data);
+        $routeData = json_decode($latestPriceList->data, true);
 
         if (!is_array($routeData)) {
-            return response()->json(['error' => 'No pricelists found in the database'], 500);
+            return response()->json(['error' => 'Failed to decode pricelist data from database'], 500);
         }
 
         return response()->json($routeData);
