@@ -31,4 +31,9 @@ class TravelPriceService
             return null;
         }
     }
+
+    public function getLatestPricelistFromDatabase()
+    {
+        return Pricelist::latest()->first();
+    }
 }

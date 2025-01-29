@@ -46,27 +46,27 @@
 
 5. Implement Pricelist Fetching and Storage (Database & Scheduled Task):
 
-    - Database Migration for Pricelists Table: (Columns: id (auto-incrementing), data (JSON/text), validUntil, timestamps).
+    + Database Migration for Pricelists Table: (Columns: id (auto-incrementing), data (JSON/text), validUntil, timestamps).
 
-    - Artisan Command (FetchAndStorePricelistCommand):
+    + Artisan Command (FetchAndStorePricelistCommand):
 
-        - Use TravelPriceService to fetch pricelist.
+        + Use TravelPriceService to fetch pricelist.
 
-        - Store pricelist in Pricelists table.
+        + Store pricelist in Pricelists table.
 
-        - Implement logic to keep only last 15 pricelists (delete oldest if needed).
+        + Implement logic to keep only last 15 pricelists (delete oldest if needed).
 
-    - Laravel Scheduler: Schedule FetchAndStorePricelistCommand to run periodically (e.g., hourly).
+    + Laravel Scheduler: Schedule FetchAndStorePricelistCommand to run periodically (e.g., hourly).
 
 6. Update TravelPricesController to Use Database:
 
-    - index() action:
+    + index() action:
 
-        - Fetch the latest active pricelist from the Pricelists database.
+        + Fetch the latest active pricelist from the Pricelists database.
 
-        - Retrieve route data from this pricelist.
+        + Retrieve route data from this pricelist.
 
-        - Return as JSON.
+        + Return as JSON.
 7. Implement Hardcoded Travel Routes:
 
     - Create config/travel_routes.php (or data/travel_routes.json) to store possible routes (origin/destination pairs).

@@ -16,12 +16,18 @@ class TravelPricesController extends Controller
      */
     public function index(TravelPriceService $service): JsonResponse
     {
-        $data = $service->fetchTravelPrices();
+        $latestPriceList = $service->getLatestPricelistFromDatabase();
 
-        if ($data === null) {
-            return response()->json(['error' => 'Failed to fetch travel prices from external API.'], 500);
+        if (!$latestPriceList) {
+            return response()->json(['error' => 'No pricelists found in the database'], 404);
         }
 
-        return response()->json($data);
+        $routeData = json_encode($latestPriceList->data);
+
+        if (!is_array($routeData)) {
+            return response()->json(['error' => 'No pricelists found in the database'], 500);
+        }
+
+        return response()->json($routeData);
     }
 }
