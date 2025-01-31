@@ -76,7 +76,7 @@
 
 1. Set up React Project (within /resources/js/):
 
-    - Utilize existing Breeze React structure in /resources/js/.
+    + Utilize existing Breeze React structure in /resources/js/.
 
 2. Create React Components for Displaying Routes:
 

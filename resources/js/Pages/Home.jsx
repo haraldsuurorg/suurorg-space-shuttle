@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Head, Link } from '@inertiajs/react';
 
+import RouteItem from '@/Components/RouteItem';
+import RouteList from '@/Components/RouteList';
+
 export default function Home({ auth,}) {
     return (
         <>
@@ -13,8 +16,8 @@ export default function Home({ auth,}) {
                 /> */}
                 <div className="relative flex min-h-screen flex-col items-center justify-center selection:bg-[#FF2D20] selection:text-white">
                     <div className="relative w-full max-w-2xl px-6 lg:max-w-7xl">
-                        <header className="grid grid-cols-2 items-center gap-2 py-10 lg:grid-cols-3 fixed top-0">
-                            <div className="flex lg:col-start-2 lg:justify-center">
+                        <header className="flex justify-between items-center h-24 top-0">
+                            <div className="flex">
                                 <svg
                                     className="h-12 w-auto text-white lg:h-16 lg:text-[#FF2D20]"
                                     viewBox="0 0 62 65"
@@ -54,13 +57,15 @@ export default function Home({ auth,}) {
                             </nav>
                         </header>
 
-                        <main className="mt-6 min-h-[85vh]">
-                            <div className="grid gap-6 lg:grid-cols-2 lg:gap-8">
-    
+                        <main className="mt-12 min-h-[85vh]">
+                            <div className="flex justify-center">
+                                <div className='flex flex-col gap-6 w-full max-w-[1000px]'>
+                                    <RouteList />
+                                </div>
                             </div>
                         </main>
 
-                        <footer className="py-16 text-center text-sm text-black dark:text-white/70">
+                        <footer className="py-8 text-center text-sm text-black dark:text-white/70">
                            {new Date().getFullYear()} © SUURORG SPACE SHUTTLE
                         </footer>
                     </div>
