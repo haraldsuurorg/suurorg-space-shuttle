@@ -8,7 +8,7 @@ export default function Home({ auth,}) {
     return (
         <>
             <Head title="Home" />
-            <div className="bg-gray-50 text-black/50 dark:bg-[#111827] dark:text-white/50">
+            <div className="bg-gray-50 text-black/50 dark:bg-[#121212] dark:text-white/50">
                 {/* <img
                     id="background"
                     className="absolute -left-20 top-0 max-w-[877px]"
@@ -59,7 +59,7 @@ export default function Home({ auth,}) {
 
                         <main className="mt-12 min-h-[85vh]">
                             <div className="flex justify-center">
-                                <div className='flex flex-col gap-6 w-full max-w-[1000px]'>
+                                <div className='flex flex-col gap-6 w-full'>
                                     <RouteList />
                                 </div>
                             </div>

@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 
 export default function PlanetSelector({ onPlanetsSelected }) {
-    const [planets, setPlanets] = useState([]);
+    const [originPlanets, setOriginPlanets] = useState([]);
+    const [destinationPlanets, setDestinationPlanets] = useState([]);
     const [originPlanet, setOriginPLanet] = useState('');
     const [destinationPlanet, setDestinationPlanet] = useState('');
+    const [routesConfigFromApi, setRoutesConfigFromApi] = useState(null);
 
     useEffect(() => {
         const fetchPlanetOptions = async () => {
@@ -13,7 +16,8 @@ export default function PlanetSelector({ onPlanetsSelected }) {
                     throw new Error(`HTTP error! status: $response.status`);
                 }
                 const routesConfig = await response.json();
-                setPlanets(Object.keys(routesConfig));
+                setRoutesConfigFromApi(routesConfig);
+                setOriginPlanets(Object.keys(routesConfig));
             } catch (error) {
                 console.error("Could not fetch travel routes config:", error);
             }
@@ -21,44 +25,66 @@ export default function PlanetSelector({ onPlanetsSelected }) {
         fetchPlanetOptions();
     }, []);
 
-    const handleOriginChange = (event) => {
-        setOriginPLanet(event.target.value);
-        onPlanetsSelected(event.target.value, destinationPlanet);
+    useEffect(() => {
+        if (originPlanet && routesConfigFromApi) {
+            setDestinationPlanets(routesConfigFromApi[originPlanet] || []);
+        } else {
+            setDestinationPlanets([]);
+        }
+        setDestinationPlanet('')
+        onPlanetsSelected(originPlanet, '');
+    }, [originPlanet]);
+
+    const handleOriginChange = (value) => {
+        setOriginPLanet(value);
     };
 
-    const handleDestinationChange = (event) => {
-        setDestinationPlanet(event.target.value);
-        onPlanetsSelected(originPlanet, event.target.value);
+    const handleDestinationChange = (value) => {
+        setDestinationPlanet(value);
+        onPlanetsSelected(originPlanet, value);
     };
 
     return (
-        <div className='flex gap-8 mb-6'>
+        <div className='flex gap-8'>
             <div>
                 <label htmlFor='origin'></label>
-                <select
+                <Select
                     id="origin"
                     value={originPlanet}
-                    onChange={handleOriginChange}
+                    onValueChange={handleOriginChange}
                 >
-                    <option value="">-- Select Origin --</option>
-                    {planets.map((planet) => (
-                        <option key={planet} value={planet}>{planet}</option>
-                    ))}
-                </select>
+                    <SelectTrigger className="w-[180px]">
+                        <SelectValue placeholder="From?" />
+                    </SelectTrigger>
+                    <SelectContent>
+                        {originPlanets.map((planet) => (
+                            <SelectItem key={planet} value={planet}>
+                                {planet}
+                            </SelectItem>
+                        ))}
+                    </SelectContent>
+                </Select>
             </div>
 
             <div>
                 <label htmlFor='destination'></label>
-                <select
+                <Select
                     id="destination"
                     value={destinationPlanet}
-                    onChange={handleDestinationChange}
+                    onValueChange={handleDestinationChange}
+                    disabled={!originPlanet}
                 >
-                    <option value="">-- Select Destination --</option>
-                    {planets.map((planet) =>
-                        <option key={planet} value={planet}>{planet}</option>
-                    )}
-                </select>
+                    <SelectTrigger className="w-[180px]">
+                        <SelectValue placeholder="To?" />
+                    </SelectTrigger>
+                    <SelectContent>
+                        {destinationPlanets.map((planet) => (
+                            <SelectItem key={planet} value={planet}>
+                                {planet}
+                            </SelectItem>
+                        ))}
+                    </SelectContent>
+                </Select>
             </div>
         </div>
     )
