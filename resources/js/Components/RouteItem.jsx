@@ -1,13 +1,13 @@
 import React from 'react';
 import PrimaryButton from './PrimaryButton';
 
-export default function RouteItem({ route, pricelistId }) {
+export default function RouteItem({ route, provider, pricelistId }) {
     if (!route) {
         return;
     }
 
     const routeInfo = route.routeInfo;
-    const provider = route.providers[0];
+    // const provider = route.providers[1];
 
     const formatDateTime = (dateTimeString) => {
         const date = new Date(dateTimeString);
