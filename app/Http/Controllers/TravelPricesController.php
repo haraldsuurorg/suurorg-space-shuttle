@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-// use Illuminate\Http\Request;
 use App\Services\TravelPriceService;
 use Illuminate\Http\JsonResponse;
+// use Illuminate\Support\Facades\Log;
 
 class TravelPricesController extends Controller
 {

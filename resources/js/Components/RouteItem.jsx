@@ -1,13 +1,14 @@
 import React from 'react';
-import PrimaryButton from './PrimaryButton';
 
-export default function RouteItem({ route, provider, pricelistId }) {
+import ReservationDialog from './ReservationDialog';
+
+export default function RouteItem({ itemRoute, provider, pricelistId }) {
+
     if (!route) {
         return;
     }
 
-    const routeInfo = route.routeInfo;
-    // const provider = route.providers[1];
+    const routeInfo = itemRoute.routeInfo;
 
     const formatDateTime = (dateTimeString) => {
         const date = new Date(dateTimeString);
@@ -27,21 +28,18 @@ export default function RouteItem({ route, provider, pricelistId }) {
         const differenceInHours = differenceInMilliseconds / (1000 * 60 * 60);
 
         return differenceInHours.toFixed(0);
-    }
+    };
 
     return (
-        <div className='w-full flex border border-white rounded-xl p-6'>
+        <div className='w-full flex bg-[#1f2937] rounded-lg p-6'>
             <div className='w-8/12 items-center'>
                 <div className='flex justify-between'>
-                    <div className='flex flex-col items-center'>
-                        <div className='flex flex-col items-center'>
-                            <p>{departure.time}</p>
-                            <p>{departure.date}</p>
-                        </div>
-                        <div>
-                            {routeInfo.from.name}
-                        </div>
+                    <div className='flex flex-col items-center text-white'>
+                        <p>{departure.time}</p>
+                        <p>{departure.date}</p>
+                        <p>{routeInfo.from.name}</p>
                     </div>
+
                     <div className='relative w-full flex justify-center'>
                         <div className='absolute bottom-1/2 w-5/6 px-4 flex justify-center border-b border-white'>
                             {duration(provider.flightStart, provider.flightEnd)}h
@@ -50,27 +48,30 @@ export default function RouteItem({ route, provider, pricelistId }) {
                             {routeInfo.distance}km
                         </div>
                     </div>
-                    <div className='flex flex-col items-center'>
-                        <div className='flex flex-col items-center'>
-                            <p>{arrival.time}</p>
-                            <p>{arrival.date}</p>
-                        </div>
-                        <div>
-                            {routeInfo.to.name}
-                        </div>
+
+                    <div className='flex flex-col items-center text-white'>
+                        <p>{arrival.time}</p>
+                        <p>{arrival.date}</p>
+                        <p>{routeInfo.to.name}</p>
                     </div>
                 </div>
             </div>
 
             <div className='flex flex-col items-center justify-center w-3/12'>
-                <p className='font-bold'>{provider.company.name}</p>
-                <p>{provider.price}€</p>
+                <p>{provider.company.name}</p>
+                <p className='text-white'>{provider.price}€</p>
             </div>
-
             <div className='flex w-1/12 items-center justify-end'>
-                <PrimaryButton>
-                    Book
-                </PrimaryButton>
+                <ReservationDialog
+                    routeDetails={{
+                        routeInfo,
+                        provider,
+                        duration: duration(provider.flightStart, provider.flightEnd),
+                        departure,
+                        arrival,
+                        pricelistId,
+                    }}
+                />
             </div>
         </div>
     );

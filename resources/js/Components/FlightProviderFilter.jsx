@@ -16,7 +16,7 @@ export default function FlightProviderFilter({
       : [];
 
   return (
-    <Accordion type="single" defaultValue={companies.length ? 'flight-provider' : ''} collapsible>
+    <Accordion type="single" defaultValue='flight-provider' collapsible>
       <AccordionItem value="flight-provider">
         <AccordionTrigger>Flight provider</AccordionTrigger>
         <AccordionContent className="flex flex-col gap-2">

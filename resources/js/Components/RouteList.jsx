@@ -5,7 +5,7 @@ import RouteItem from './RouteItem';
 import PlanetSelector from './PlanetSelector';
 import FlightProviderFilter from './FlightProviderFilter';
 
-export default function RouteList() {
+export default function RouteList(auth) {
     const [routesData, setRoutesData] = useState(null);
     const [filteredRoutes, setFilteredRoutes] = useState([]);
     const [selectedOrigin, setSelectedOrigin] = useState(null);
@@ -144,15 +144,19 @@ export default function RouteList() {
                             leg.providers.map((provider) => (
                                 <RouteItem
                                     key={`${leg.id}-${provider.id}`}
-                                    route={leg}
+                                    itemRoute={leg}
                                     provider={provider}
                                     pricelistId={routesData.id}
                                 />
                             ))
                         ))
-                    ) : (
-                        console.log('not true'),
-                        <p className='flex justify-center mt-4'>Please select your origin and destination planet!</p>
+                    ) : auth.user ? (
+                            <p className='flex justify-center mt-4 text-center px-8'>Please select your origin and destination planet!</p>
+                        ): (
+                           <>
+                            <p className='flex justify-center mt-4 text-center px-8'>Please select your origin and destination planet!</p>
+                            <p className='flex justify-center text-center px-8 -mt-6'>To book a flight, we kindly request that you log in or create an account for a seamless experience. However, you are welcome to browse our available flights without logging in.</p>
+                           </>
                     )}
                 </div>
             </div>

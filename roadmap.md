@@ -80,39 +80,39 @@
 
 2. Create React Components for Displaying Routes:
 
-    - RouteList component (list of routes).
+    + RouteList component (list of routes).
 
-    - RouteItem component (details for a single route).
+    + RouteItem component (details for a single route).
 
-    - PlanetSelector component (origin/destination dropdowns).
+    + PlanetSelector component (origin/destination dropdowns).
 
 3. Fetch Data from Laravel Backend API in React:
 
-    - Use fetch (or axios) to call /api/travel-prices.
+    + Use fetch (or axios) to call /api/travel-prices.
 
-    - Store data in React component state.
+    + Store data in React component state.
 
 4. Display Basic Route Information in React:
 
-    - Render route data (origin, destination, price, etc.) in RouteList and RouteItem.
+    + Render route data (origin, destination, price, etc.) in RouteList and RouteItem.
 
 5. Create Planet Selection UI (React):
 
-    - Implement PlanetSelector component using hardcoded routes for options.
+    + Implement PlanetSelector component using hardcoded routes for options.
 
-    - Update React state with selected planets.
+    + Update React state with selected planets.
 
 6. Filter Routes based on Planet Selection (Frontend Logic Initially):
 
-    - Filter route data in React based on selected origin/destination.
+    + Filter route data in React based on selected origin/destination.
 
 7. Add Filtering and Sorting Controls (React):
 
-    - UI for filtering by company, sorting by price, distance, time.
+    + UI for filtering by company, sorting by price, distance, time.
 
 8. Implement Filtering and Sorting Logic (React - Frontend):
 
-    - Implement filtering/sorting in React components.
+    + Implement filtering/sorting in React components.
 
 
 ## Phase 3: Backend - Reservations and Database ##
