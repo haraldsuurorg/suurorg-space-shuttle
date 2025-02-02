@@ -139,16 +139,21 @@ export default function RouteList() {
                 </div>
 
                 <div className='flex flex-col gap-8 w-3/4'>
-                    {sortedAndFilteredRoutes.map((leg) => (
-                        leg.providers.map((provider) => (
-                            <RouteItem
-                                key={`${leg.id}-${provider.id}`}
-                                route={leg}
-                                provider={provider}
-                                pricelistId={routesData.id}
-                            />
+                    {filteredRoutes.length ? (
+                        sortedAndFilteredRoutes.map((leg) => (
+                            leg.providers.map((provider) => (
+                                <RouteItem
+                                    key={`${leg.id}-${provider.id}`}
+                                    route={leg}
+                                    provider={provider}
+                                    pricelistId={routesData.id}
+                                />
+                            ))
                         ))
-                    ))}
+                    ) : (
+                        console.log('not true'),
+                        <p className='flex justify-center mt-4'>Please select your origin and destination planet!</p>
+                    )}
                 </div>
             </div>
         </div>
