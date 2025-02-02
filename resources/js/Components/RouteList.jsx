@@ -1,10 +1,9 @@
 import React, {useState, useEffect } from 'react';
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger, } from "@/components/ui/accordion";
-import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group"
-import { Checkbox } from "@/Components/ui/checkbox";
+import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 
 import RouteItem from './RouteItem';
 import PlanetSelector from './PlanetSelector';
+import FlightProviderFilter from './FlightProviderFilter';
 
 export default function RouteList() {
     const [routesData, setRoutesData] = useState(null);
@@ -60,16 +59,14 @@ export default function RouteList() {
                     leg.routeInfo.to.name === selectedDestination
                 );
             });
-            // let sortedRoutes = [...filteredLegs];
+
             setFilteredRoutes(filteredLegs);
 
             filteredLegs = filterByCompanies(filteredLegs, selectedCompanies);
 
             if (sortBy) {
-                console.log('new sortby')
                 filteredLegs.forEach(leg => {
                   if (sortBy === 'price') {
-                    console.log('new sortby price');
                     leg.providers.sort((a, b) => a.price - b.price);
                   } else if (sortBy === 'travel time') {
                     leg.providers.sort((a, b) => {
@@ -102,8 +99,18 @@ export default function RouteList() {
         setSortBy(value === sortBy ? null : value);
     };
 
+    const handleCompanyToggle = (companyName, checked) => {
+        setSelectedCompanies((prevCompanies) => {
+          if (checked) {
+            return [...prevCompanies, companyName];
+          } else {
+            return prevCompanies.filter((c) => c !== companyName);
+          }
+        });
+    };
+
     if (!routesData) {
-        return <p>Loading routes...</p>;
+        return <p className='flex w-full justify-center mt-24'>Loading...</p>;
     }
 
     return (
@@ -124,41 +131,11 @@ export default function RouteList() {
             </div>
             <div className='flex gap-8'>
                 <div className='w-1/4'>
-                    <Accordion type="single" defaultValue='flight-provider' collapsible>
-                        <AccordionItem value="flight-provider">
-                            <AccordionTrigger>Flight provider</AccordionTrigger>
-                            <AccordionContent className="flex flex-col gap-2">
-                                {filteredRoutes && Array.isArray(filteredRoutes) ? (
-                                    Array.from(new Set(filteredRoutes.flatMap(leg => leg.providers.map(p => p.company.name)))).sort().map(companyName => (
-                                          <div key={companyName} className='flex items-center space-x-2'>
-                                              <Checkbox
-                                                  id={`company-${companyName}`}
-                                                  value={companyName}
-                                                  checked={selectedCompanies.includes(companyName)}
-                                                  onCheckedChange={(checked) => {
-                                                      setSelectedCompanies(prevCompanies => {
-                                                          if (checked) {
-                                                              return [...prevCompanies, companyName];
-                                                          } else {
-                                                              return prevCompanies.filter(c => c !== companyName)
-                                                          }
-                                                      });
-                                                  }}
-                                              />
-                                              <label
-                                                  htmlFor={`company-${companyName}`}
-                                                  className='text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70'
-                                              >
-                                                  {companyName}
-                                              </label>
-                                          </div>
-                                      ))
-                                ) : (
-                                    ''
-                                )}
-                            </AccordionContent>
-                        </AccordionItem>
-                    </Accordion>
+                    <FlightProviderFilter
+                        filteredRoutes={filteredRoutes}
+                        selectedCompanies={selectedCompanies}
+                        onCompanyToggle={handleCompanyToggle}
+                    />
                 </div>
 
                 <div className='flex flex-col gap-8 w-3/4'>
