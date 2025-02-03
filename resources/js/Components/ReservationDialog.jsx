@@ -65,7 +65,13 @@ export default function ReservationDialog ({ routeDetails }) {
                 <>
                     <AlertDialogHeader>
                         <AlertDialogCancel className='absolute right-4 top-4 p-0 h-fit border-none bg-transparent hover:bg-transparent'>
-                            <svg className="!h-6 !w-6" width="147px" height="147px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path fill-rule="evenodd" clip-rule="evenodd" d="M19.207 6.207a1 1 0 0 0-1.414-1.414L12 10.586 6.207 4.793a1 1 0 0 0-1.414 1.414L10.586 12l-5.793 5.793a1 1 0 1 0 1.414 1.414L12 13.414l5.793 5.793a1 1 0 0 0 1.414-1.414L13.414 12l5.793-5.793z" fill="white"></path></g></svg>
+                        <svg className="!h-6 !w-6" width="147px" height="147px" viewBox="0 0 24 24"         fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
+                            <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>
+                            <g id="SVGRepo_iconCarrier">
+                                <path fillRule="evenodd" clipRule="evenodd" d="M19.207 6.207a1 1 0 0 0-1.414-1.414L12 10.586 6.207 4.793a1 1 0 0 0-1.414 1.414L10.586 12l-5.793 5.793a1 1 0 1 0 1.414 1.414L12 13.414l5.793 5.793a1 1 0 0 0 1.414-1.414L13.414 12l5.793-5.793z" fill="white"></path>
+                            </g>
+                        </svg>
                         </AlertDialogCancel>
                         <AlertDialogTitle className='text-lg'>
                             {booked ? 'Congratulations! Booking successfully confirmed!' : 'Do you want to confirm your booking?'}
