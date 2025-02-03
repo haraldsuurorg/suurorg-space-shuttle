@@ -119,27 +119,27 @@
 
 1. Database Migrations and Models for Reservations:
 
-    - Reservation Model and Migration (columns: reservation details, pricing snapshot, pricelist_id foreign key).
+    + Reservation Model and Migration (columns: reservation details, pricing snapshot, pricelist_id foreign key).
 
 2. Update Backend to Store Pricelists (Laravel): (Already planned in Phase 1, Step 5)
 
 3. Create Reservation Controller and Route (Laravel):
 
-    - ReservationController with store(Request $request) action.
+    + ReservationController with store(Request $request) action.
 
-    - POST /api/reservations route.
+    + POST /api/reservations route.
 
-    - Validation, data storage in Reservations table, JSON response.
+    + Validation, data storage in Reservations table, JSON response.
 
 4. Create Reservation Form in React:
 
-    - ReservationForm component to collect user details and route info.
+    + ReservationForm component to collect user details and route info.
 
 5. Submit Reservation Data to Backend API (React):
 
-    - Send POST request to /api/reservations with form data.
+    + Send POST request to /api/reservations with form data.
 
-    - Handle success/error responses.
+    + Handle success/error responses.
 
 6. "Manage Bookings" Page (React):
 

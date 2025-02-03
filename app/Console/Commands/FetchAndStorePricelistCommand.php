@@ -83,7 +83,7 @@ class FetchAndStorePricelistCommand extends Command
                     DB::beginTransaction();
 
                     $pricelist->reservations()->delete();
-                    $this->info("Deleted " . $pricelist->reservations()->count() . "reservations for pricelist ID: {$pricelist->pricelist_id}.");
+                    $this->info("Deleted " . $pricelist->reservations()->count() . " reservations for pricelist ID: {$pricelist->pricelist_id}.");
 
                     DB::commit();
                 } catch (\Exception $e) {
@@ -91,10 +91,10 @@ class FetchAndStorePricelistCommand extends Command
                     $this->error('Error deleting related reservations:' . $e->getMessage());
                     Log::error('Error deleting related reservations:' . $e->getMessage());
                 }
-
+                $this->info("Deleted pricelist with id {$pricelist->pricelist_id}.");
                 $pricelist->delete();
             }
-            $this->info("Deleted {$numberToDelete} oldest pricelists.");
+            $this->info("Deleted {$numberToDelete} oldest pricelist(s).");
         } else {
             $this->info("Pricelist cleanup not needed. {$pricelistCount} pricelists in the database.");
         }

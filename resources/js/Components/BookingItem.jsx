@@ -1,7 +1,6 @@
 import React from 'react';
-import ReservationDialog from './ReservationDialog';
 
-export default function RouteItem({ itemRoute, provider, pricelistId }) {
+export default function RouteItem({ itemRoute, provider }) {
 
     if (!route) {
         return;
@@ -56,21 +55,9 @@ export default function RouteItem({ itemRoute, provider, pricelistId }) {
                 </div>
             </div>
 
-            <div className='flex flex-col items-center justify-center w-3/12'>
+            <div className='flex flex-col items-center justify-center w-4/12'>
                 <p>{provider.company.name}</p>
                 <p className='text-white'>{provider.price}€</p>
-            </div>
-            <div className='flex w-1/12 items-center justify-end'>
-                <ReservationDialog
-                    routeDetails={{
-                        routeInfo,
-                        provider,
-                        duration: duration(provider.flightStart, provider.flightEnd),
-                        departure,
-                        arrival,
-                        pricelistId,
-                    }}
-                />
             </div>
         </div>
     );

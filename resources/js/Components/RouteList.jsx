@@ -1,11 +1,12 @@
 import React, {useState, useEffect } from 'react';
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
+import { usePage } from '@inertiajs/react'
 
 import RouteItem from './RouteItem';
 import PlanetSelector from './PlanetSelector';
 import FlightProviderFilter from './FlightProviderFilter';
 
-export default function RouteList(auth) {
+export default function RouteList() {
     const [routesData, setRoutesData] = useState(null);
     const [filteredRoutes, setFilteredRoutes] = useState([]);
     const [selectedOrigin, setSelectedOrigin] = useState(null);
@@ -13,6 +14,8 @@ export default function RouteList(auth) {
     const [selectedCompanies, setSelectedCompanies] = useState([]);
     const [sortBy, setSortBy] = useState(null);
     const [sortedAndFilteredRoutes, setSortedAndFilteredRoutes] = useState([]);
+
+    const user = usePage().props.auth.user;
 
     const filterByCompanies = (legs, selectedCompanies) => {
         if (selectedCompanies.length === 0) {
@@ -150,7 +153,7 @@ export default function RouteList(auth) {
                                 />
                             ))
                         ))
-                    ) : auth.user ? (
+                    ) : user ? (
                             <p className='flex justify-center mt-4 text-center px-8'>Please select your origin and destination planet!</p>
                         ): (
                            <>
