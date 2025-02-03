@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use App\Models\Pricelist;
 use App\Services\TravelPriceService;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
 class FetchAndStorePricelistCommand extends Command
@@ -65,6 +66,7 @@ class FetchAndStorePricelistCommand extends Command
 
     /**
      * Cleanup old pricelists, keeping the last 15.
+     * Cleanup releated reservations.
      */
     protected function cleanupOldPricelists()
     {
@@ -77,9 +79,21 @@ class FetchAndStorePricelistCommand extends Command
             $oldestPricelists = Pricelist::orderby('id', 'asc')->limit($numberToDelete)->get();
 
             foreach ($oldestPricelists as $pricelist) {
+                try {
+                    DB::beginTransaction();
+
+                    $pricelist->reservations()->delete();
+                    $this->info("Deleted " . $pricelist->reservations()->count() . "reservations for pricelist ID: {$pricelist->pricelist_id}.");
+
+                    DB::commit();
+                } catch (\Exception $e) {
+                    DB::rollBack();
+                    $this->error('Error deleting related reservations:' . $e->getMessage());
+                    Log::error('Error deleting related reservations:' . $e->getMessage());
+                }
+
                 $pricelist->delete();
             }
-
             $this->info("Deleted {$numberToDelete} oldest pricelists.");
         } else {
             $this->info("Pricelist cleanup not needed. {$pricelistCount} pricelists in the database.");

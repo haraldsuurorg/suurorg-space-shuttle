@@ -21,7 +21,7 @@ return new class extends Migration
             $table->timestamp('flight_start_time');
             $table->timestamp('flight_arrival_time');
             $table->string('company_name');
-            $table->string('pricelist_id')->constrained('pricelists', 'pricelist_id')->onDelete('cascade');
+            $table->string('pricelist_id');
             $table->timestamps();
         });
     }
