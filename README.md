@@ -16,7 +16,7 @@ This project is a Laravel application with a React front-end built using Laravel
 1. **Clone the repository:**
 
    ```bash
-   git clone git@github.com:haraldsuurorg/suurorg-space-shuttle.git
+   git clone https://github.com/haraldsuurorg/suurorg-space-shuttle.git
    ```
 
 2. **Navigate to the project directory:**
