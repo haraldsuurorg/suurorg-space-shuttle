@@ -11,6 +11,6 @@ class Pricelist extends Model
 
     public function reservations()
     {
-        return $this->hasMany(Reservation::class)->whereColumn('pricelist_id', 'pricelist_id');
+        return $this->hasMany(Reservation::class, 'pricelist_id', 'pricelist_id');
     }
 }
